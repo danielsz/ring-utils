@@ -1,12 +1,12 @@
 (set-env! :source-paths   #{"src"}
           :resource-paths   #{"src"}
-          :dependencies '[[ring "1.6.3" :scope "provided"]
-                          [compojure "1.6.0" :scope "provided"]])
+          :dependencies '[[ring "1.7.1" :scope "provided"]
+                          [compojure "1.6.1" :scope "provided"]])
 
 (task-options!
  push {:repo-map {:url "https://clojars.org/repo/"}}
  pom {:project 'org.danielsz/ring-utils
-      :version "0.1.2-SNAPSHOT"
+      :version "0.1.2"
       :scm {:name "git"
             :url "https://github.com/danielsz/ring-utils"}})
 
