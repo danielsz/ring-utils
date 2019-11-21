@@ -1,7 +1,7 @@
 {:pom
  {:group-id "org.danielsz",
   :artifact-id "ring-utils",
-  :version "0.1.4-SNAPSHOT",
+  :version "0.1.4",
   :name "Ring utils"},
  :packaging
  {:uberjar
