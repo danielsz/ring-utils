@@ -1,5 +1,6 @@
 (ns ring-utils.core
-  (:require [ring.util.response :as util :refer [response redirect content-type]]))
+  (:require [ring.util.response :as util :refer [response redirect content-type]]
+            [clojure.string :as str]))
 
 (defn logged-in? [{session :session}]
   (contains? session :uid))
@@ -28,4 +29,10 @@
   (if (> server-port 8000)
     (str "https://" server-name) ;production
     (str "http://" server-name ":" server-port) ;development
-    ))
+))
+
+(defn subdomain [x]
+  (let [host (if (map? x)
+               (get x "host")
+               x)]
+    (first (str/split host #"\."))))
