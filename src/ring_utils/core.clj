@@ -8,10 +8,11 @@
 (defn admin? [{session :session}]
   (contains? session :admin))
 
-(defn status [{session :session headers :headers cookies :cookies :as req}]
+(defn status [{session :session headers :headers cookies :cookies flash :flash :as req}]
   (-> (str "Session: " session 
         "\nCookies: " cookies 
-        "\nHeaders: " headers 
+        "\nHeaders: " headers
+        "\nFlash: " flash
         "\nLogged in: " (logged-in? req))
     (response)
     (content-type "txt")))
