@@ -8,12 +8,8 @@
 (defn admin? [{session :session}]
   (contains? session :admin))
 
-(defn status [{session :session headers :headers cookies :cookies flash :flash :as req}]
-  (-> (str "Session: " session 
-        "\nCookies: " cookies 
-        "\nHeaders: " headers
-        "\nFlash: " flash
-        "\nLogged in: " (logged-in? req))
+(defn status [req]
+  (-> (str/join "\n" (for [[key val] req] (str key " " val)))
     (response)
     (content-type "txt")))
 
