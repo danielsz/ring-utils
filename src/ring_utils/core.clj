@@ -6,19 +6,19 @@
   (contains? session :uid))
 
 (defn admin? [{session :session}]
-  (contains? session :admin))
+  (some #{(:uid session)} (:admin session)))
 
-(defn status [req]
+(defn status* [req]
   (-> (str/join "\n" (for [[key val] req] (str key " " val)))
     (response)
     (content-type "txt")))
 
-(defn status-admin [req]
+(defn status-admin* [req]
   (if (admin? req)
-    (status req)
+    (status* req)
     (redirect "/")))
 
-(defn logout [{session :session}]
+(defn logout* [{session :session}]
   (-> (redirect "/")
       (assoc :session {})))
 
