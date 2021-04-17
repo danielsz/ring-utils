@@ -11,12 +11,13 @@
 (defn status [req]
   (-> (str/join "\n" (for [[key val] req] (str key " " val)))
     (response)
-    (content-type "txt")))
+    (content-type "text/plain")))
 
 (defn status-admin [req]
   (if (admin? req)
     (status req)
-    (redirect "/")))
+    (content-type {:status  403
+                  :body "Forbidden"} "text/plain")))
 
 (defn logout [{session :session}]
   (-> (redirect "/")
