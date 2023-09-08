@@ -1,16 +1,12 @@
 (ns ring-utils.endpoints
-  (:require [compojure.core :refer [routes GET]]
-            [ring-utils.core :as impl]))
+  (:require [ring-utils.core :as impl]))
 
-(defn status [_]
-  (routes
-   (GET "/status" [] impl/status)))
+(def status
+  [["/status" {:get impl/status}]])
 
-(defn status-admin [_]
-  (routes
-   (GET "/status" [] impl/status-admin)))
+(def status-admin
+  [["/status" {:get impl/status-admin}]])
 
-(defn logout [_]
-  (routes
-   (GET "/logout" [] impl/logout)))
+(def logout
+  [["/logout" {:get impl/logout}]])
 

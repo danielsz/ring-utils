@@ -1,7 +1,7 @@
 {:pom
  {:group-id "org.danielsz",
   :artifact-id "ring-utils",
-  :version "0.2.1",
+  :version "0.2.2",
   :name "Ring utils"},
  :packaging
  {:uberjar
@@ -18,9 +18,8 @@
      "META-INF/*.DSA"
      "META-INF/*.RSA"]}},
   :jar
-  {:enabled true,
-   :remote-repository
-   {:id "clojars", :url "https://clojars.org/repo"}}},
+  {:enabled true}},
+ :distribution-management {:id "clojars", :url "https://clojars.org/repo"}
  :cljs
  {:enabled false,
   :compiler-opts
