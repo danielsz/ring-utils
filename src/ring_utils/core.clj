@@ -8,16 +8,19 @@
 (defn admin? [{session :session}]
   (some #{(:uid session)} (:admin session)))
 
-(defn status [req]
-  (-> (str/join "\n" (for [[key val] req] (str key " " val)))
-    (response)
-    (content-type "text/plain")))
-
-(defn status-admin [req]
-  (if (admin? req)
-    (status req)
+(defn status [server-names req]
+  (if (some #{(:server-name req)} @server-names)
+    (-> (str/join "\n" (for [[key val] req] (str key " " val)))
+       (response)
+       (content-type "text/plain"))
     (content-type {:status  403
-                  :body "Forbidden"} "text/plain")))
+                   :body "Forbidden"} "text/plain")))
+
+(defn status-admin [server-names req]
+  (if (admin? req)
+    (status server-names req)
+    (content-type {:status  403
+                   :body "Forbidden"} "text/plain")))
 
 (defn logout [{session :session}]
   (-> (redirect "/")
