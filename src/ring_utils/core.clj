@@ -26,10 +26,12 @@
   (-> (redirect "/")
       (assoc :session {})))
 
-(defn origin [{server-name :server-name server-port :server-port scheme :scheme :as request}]
+(defn origin
+  "Scheme is useless behind a reverse proxy"
+  [{server-name :server-name server-port :server-port scheme :scheme :as request}]
   (if (> server-port 8000)
-    (str (name scheme) "://" server-name) ;production
-    (str (name scheme) "://" server-name ":" server-port) ;development
+    (str "https://" server-name) ;production
+    (str "http://" server-name ":" server-port) ;development
 ))
 
 (defn subdomain [x]
